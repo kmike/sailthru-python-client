@@ -1,8 +1,9 @@
+#!/usr/bin/env python
 from setuptools import setup
 
 version = '1.0.6'
 
-setup(name='sailthru-client', 
+setup(name='sailthru-client',
         version=version,
         description='Python client for Sailthru API',
         long_description=open('./README.md').read(),
