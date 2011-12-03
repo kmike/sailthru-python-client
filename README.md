@@ -24,10 +24,14 @@ It can make requests to following [API calls](http://docs.sailthru.com/api):
 For usage examples, you can take a look at [Ruby](https://github.com/sailthru/sailthru-ruby-client/blob/master/README.md) and [PHP](https://github.com/sailthru/sailthru-php5-client/blob/master/README.md) examples
 
 ### Installation (Tested with Python 2.7.x)
-    pip install -e git://github.com/sailthru/sailthru-python-client.git#egg=sailthru-client
+    pip install git+https://github.com/sailthru/sailthru-python-client.git#egg=sailthru-client
+
+### Running tests
+    nosetests -v
 
 Examples
 --------
+
     from sailthru.sailthru_client import SailthruClient
     from sailthru.sailthru_response import SailthruResponseError
     from sailthru.sailthru_error import SailthruClientError
@@ -40,7 +44,7 @@ Examples
         response = sailthru_client.set_email('praj@sailthru.com')
         #response = sailthru_client.delete_template('from-python')
         #response = sailthru_client.get_alert('praj@infynyxx.com')
-        
+
         body = response.get_body()
         if response.is_ok():
             print body
@@ -52,3 +56,17 @@ Examples
     except SailthruClientError, e:
         print("Exception: " + str(e))
 
+
+### postbacks
+
+    # for authenticating verify postbacks
+    verify_params = {'action': 'verify', 'email': 'praj@sailthru.com', 'send_id': 'TE8EZ3-LmosnAgAA', 'sig': 'generated_signature'}
+    is_verified_postback = sailtrhu_client.recieve_verify_post(verify_params)
+
+    # for authenticating optout postbacks
+    optout_params = {'action': 'verify', 'email': 'praj@sailthru.com', 'sig': 'generated_signature'}
+    is_optout_postback = sailtrhu_client.recieve_optout_post(optout__params)
+
+    # for authenticating hardbounce postbacks
+    hardbounce_params = {'action': 'hardbounce', 'email': 'praj@sailthru.com', 'sig': 'generated_signature'}
+    is_hardbounce_postback = sailtrhu_client.recieve_hardbounce_post(hardbounce_params)
