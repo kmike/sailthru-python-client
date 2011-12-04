@@ -500,7 +500,7 @@ class SailthruClient(object):
             data['report_email'] = report_email
         if postback_url is not None:
             data['postback_url'] = postback_url
-        return self.api_post(job, data, file_data)
+        return self.api_post('job', data, file_data)
 
     def process_import_job(self, job_list, emails, report_email = None, postback_url = None):
         """
