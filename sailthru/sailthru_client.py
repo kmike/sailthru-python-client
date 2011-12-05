@@ -6,6 +6,11 @@ from sailthru_http import sailthru_http_request
 try: import simplejson as json
 except ImportError: import json
 
+def _to_string(data):
+    if isinstance(data, unicode):
+        return data.encode('utf8')
+    return str(data)
+
 def extract_params(params):
     """
     Extracts the values of a set of parameters, recursing into nested dictionaries.
@@ -29,7 +34,7 @@ def get_signature_string(params, secret):
     """
     str_list = []
     for item in extract_params(params):
-        str_list.append(str(item))
+        str_list.append(_to_string(item))
     str_list.sort()
     return secret + "".join(str_list)
 
