@@ -37,7 +37,12 @@ def sailthru_http_request(url, data, method, file_data = None):
     headers = { 'User-Agent': 'Sailthru API Python Client' }
 
     try:
-        response = requests.request(method, url, params, body, headers, None, file_data)
+        response = requests.request(method, url,
+            params=params,
+            data=body,
+            headers=headers,
+            files = file_data
+        )
         response.raise_for_status()
         return SailthruResponse(response)
     except requests.RequestException, e:
