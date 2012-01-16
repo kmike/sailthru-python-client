@@ -14,7 +14,7 @@ class SailthruResponse(object):
 
     def get_body(self, as_dictionary = True):
         content = self.response.content
-        if as_dictionary == True:
+        if as_dictionary:
             return json.loads(content)
         else:
             return content
